@@ -22,11 +22,7 @@ app.get('/', (req, res) => {
 // and then: import fetch from 'node-fetch';
 
 
-
-    res.send('Hello World!');
-});
-
-app.get('/pisos',(req, res) => {
-    fetchPisosTuristicos().then(console.log);
+app.get('/pisos',async(req, res) => {
+    fetchPisosTuristicos().then(data => res.send(data));
 })
 

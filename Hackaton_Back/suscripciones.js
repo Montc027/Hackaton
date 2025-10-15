@@ -9,10 +9,10 @@ export default function suscribirse(email) {
         return;
     }
     
-    const jsonUsers=fs.readFileSync('suscripciones.json','utf-8');
+    const jsonUsers=fs.readFileSync('datos/suscripciones.json','utf-8');
     const users=JSON.parse(jsonUsers);
     if (!users.includes(email)){
-        users.push(email);
+        users.push(email.toString());
         fs.writeFileSync('datos/suscripciones.json',JSON.stringify(users));
     }
 }

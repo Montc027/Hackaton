@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import fetchData from './puntosDeInteres.js';
 
 const app = express();
 const PORT = 3000;
@@ -12,5 +13,11 @@ app.listen(PORT, () => {
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send(fetchData());
 });
+
+// If you're on Node < 18, install node-fetch:
+// npm install node-fetch
+// and then: import fetch from 'node-fetch';
+
+

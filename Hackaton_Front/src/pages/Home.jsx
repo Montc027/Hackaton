@@ -1,6 +1,5 @@
     import React from "react";
     import Card from "../components/Card";
-    import FooterImg from "../assets/footer.webp";
 
     function Home() {
     const cards = [
@@ -30,13 +29,6 @@
             Explora datos, mapas y recomendaciones para elegir dónde vivir o cómo moverte por la ciudad 
             según la presión turística de cada barrio.
         </h3>
-
-        <section
-            className="w-full h-64 bg-cover bg-center"
-            style={{ backgroundImage: `url(${FooterImg})` }}
-            aria-hidden="true"
-        />
-        
         </main>
     );
     }

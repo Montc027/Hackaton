@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import puntosDeInteres from './puntosDeInteres.js';
-import { fetchPisosTuristicos } from './pisos.js';
+import { fetchPisosTuristicos, fetchPisosTuristicosFull } from './pisos.js';
 import suscribirse from './suscripciones.js';
 //import ngrok from '@ngrok/ngrok';
 

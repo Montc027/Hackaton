@@ -4,7 +4,6 @@ import puntosDeInteres from './puntosDeInteres.js';
 import { fetchPisosTuristicos } from './pisos.js';
 import { fetchPisosTuristicosFull } from './pisosFull.js';
 import suscribirse from './suscripciones.js';
-//import ngrok from '@ngrok/ngrok';
 
 
 
@@ -41,9 +40,3 @@ app.post('/api/suscribirse', (req, res) => {
     suscribirse(email);
     res.sendStatus(200);
 });
-
-
-
-/*ngrok.listen(app).then(() => {
-  console.log("established listener at: " + app.listener.url());
-});*/

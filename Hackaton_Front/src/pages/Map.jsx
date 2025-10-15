@@ -44,12 +44,12 @@ function Map() {
 
       const geojsonNormal = {
         type: "FeatureCollection",
-        features: allPoints.filter(p => !p.properties.free),
+        features: allPoints.filter((p) => !p.properties.free),
       };
 
       const geojsonFree = {
         type: "FeatureCollection",
-        features: allPoints.filter(p => p.properties.free),
+        features: allPoints.filter((p) => p.properties.free),
       };
 
       setStats({
@@ -122,14 +122,15 @@ function Map() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    fetch('https://hackaton-production-cdcd.up.railway.app/api/suscribirse', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
+
+    fetch("https://hackaton-production-cdcd.up.railway.app/api/suscribirse", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }), 
     })
-      .then(response => response.json())
-      .then(data => console.log('Respuesta recibida:', data))
-      .catch(error => console.error('Error:', error));
+      .then((response) => response.json())
+      .then((data) => console.log("Respuesta recibida:", data))
+      .catch((error) => console.error("Error:", error));
   };
 
   return (
@@ -137,6 +138,7 @@ function Map() {
       <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-[#8C1758] tracking-wide leading-snug text-center drop-shadow-md max-w-[900px]">
         Mapa de pisos
       </h2>
+
       <section className="relative w-full max-w-[900px]">
         <div
           ref={mapContainerRef}
@@ -154,9 +156,10 @@ function Map() {
           </div>
         </section>
       </section>
+
       <h3 className="text-xl font-semibold text-gray-700 mt-6 mb-4 text-center max-w-[900px]">
-  Haz clic en los puntos del mapa para ver más información sobre cada piso. Los verdes están libres y los rojos ocupados.
-</h3>
+        Haz clic en los puntos del mapa para ver más información sobre cada piso. Los verdes están libres y los rojos ocupados.
+      </h3>
 
       {selectedPoint && (
         <section className="w-full max-w-[900px] bg-white rounded-xl shadow-lg p-6 border border-gray-200 text-center">
@@ -168,7 +171,7 @@ function Map() {
             !submitted ? (
               <>
                 <p className="text-green-700 font-semibold mb-3">
-                  El piso está libre  ¡Es tu oportunidad!
+                  El piso está libre ¡Es tu oportunidad!
                 </p>
                 <form onSubmit={handleSubmit} className="flex flex-col items-center">
                   <input
@@ -193,14 +196,11 @@ function Map() {
               </p>
             )
           ) : (
-            <p className="text-red-600 font-medium">
-              Este piso actualmente está ocupado.
-            </p>
+            <p className="text-red-600 font-medium">Este piso actualmente está ocupado.</p>
           )}
         </section>
       )}
     </section>
-    
   );
 }
 

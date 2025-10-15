@@ -1,7 +1,7 @@
 import fs from 'fs';
 export default function suscribirse(email) {
-    if (!fs.existsSync('suscripciones.json')){
-        fs.writeFileSync('suscripciones.json','[]');
+    if (!fs.existsSync('datos/suscripciones.json')){
+        fs.writeFileSync('datos/suscripciones.json','[]');
     }
     const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!regexMail.test(email)) {
@@ -13,6 +13,6 @@ export default function suscribirse(email) {
     const users=JSON.parse(jsonUsers);
     if (!users.includes(email)){
         users.push(email);
-        fs.writeFileSync('suscripciones.json',JSON.stringify(users));
+        fs.writeFileSync('datos/suscripciones.json',JSON.stringify(users));
     }
 }

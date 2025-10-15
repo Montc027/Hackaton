@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import puntosDeInteres from './puntosDeInteres.js';
-import { fetchPisosTuristicos, fetchPisosTuristicosFull } from './pisos.js';
+import { fetchPisosTuristicos } from './pisos.js';
+import { fetchPisosTuristicosFull } from './pisosFull.js';
 import suscribirse from './suscripciones.js';
 //import ngrok from '@ngrok/ngrok';
 
@@ -30,9 +31,9 @@ app.get('/api/puntosDeInteres', async (req, res) => {
 app.get('/api/pisos',async(req, res) => {
     fetchPisosTuristicos().then(data => res.send(data));
 })
-app.get('/api/pisosFull',async(req, res) => {
-    fetchPisosTuristicosFull().then(data => res.send(data));
-})
+// app.get('/api/pisosFull',async(req, res) => {
+//     fetchPisosTuristicosFull().then(data => res.send(data));
+// })
 
 app.post('/api/suscribirse', (req, res) => {
     const { email } = req.body;

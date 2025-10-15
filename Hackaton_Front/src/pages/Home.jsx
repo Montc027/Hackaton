@@ -1,24 +1,25 @@
     import React from "react";
-    import Card from "../components/Card";
 
-    function Home() {
-    const cards = [
-        { emoji: "🗺️", title: "Mapa", description: "Visualiza cómo el turismo afecta los barrios.", buttonText: "Ver mapa", route: "/mapa" },
-        { emoji: "🏆", title: "Ranking", description: "Compara barrios según la presión turística.", buttonText: "Ver ranking", route: "/ranking" },
-        { emoji: "🚨", title: "Alertas", description: "Recibe avisos sobre zonas saturadas.", buttonText: "Ver alertas", route: "/alertas" },
-        { emoji: "💡", title: "Recomendaciones", description: "Consejos útiles para turistas y vecinos.", buttonText: "Ver recomendaciones", route: "/recomendaciones" },
-        { emoji: "📊", title: "Gráficos", description: "Consulta estadísticas y análisis visual.", buttonText: "Ver gráficos", route: "/graficos" },
-    ];
-
+    function Card({ emoji, title, description, buttonText, route }) {
     return (
-        <main className="flex flex-col items-center mt-10 px-4">
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cards.map((card, index) => (
-            <Card key={index} {...card} />
-            ))}
-        </section>
-        </main>
+        <a
+        href={route}
+        className="block p-10 rounded-3xl shadow-2xl w-72 sm:w-80 lg:w-96 text-center mb-8 hover:shadow-black/50 transition-shadow duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        style={{ backgroundColor: "#D9D9D9" }} 
+        >
+        <section className="text-7xl mb-6">{emoji}</section>
+        <h3 className="text-3xl font-bold mb-4">{title}</h3>
+        <p className="text-gray-700 mb-6">{description}</p>
+        {buttonText && (
+            <button
+            style={{ backgroundColor: "#003957" }}
+            className="text-white px-6 py-3 rounded hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300"
+            >
+            {buttonText}
+            </button>
+        )}
+        </a>
     );
     }
 
-    export default Home;
+    export default Card;

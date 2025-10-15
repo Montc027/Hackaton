@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState} from "react";
+import React, { useRef, useEffect, useState } from "react"; // <- descomentar useState
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import data from "../../Datos.json"; 
@@ -110,32 +110,27 @@ function Map() {
     e.preventDefault();
     setSubmitted(true);
     fetch('https://hackaton-production-cdcd.up.railway.app/api/suscribirse', {
-  method: 'POST', // o 'post'
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    email: email,
-  }),
-})
-.then(response => response.json()) // Procesa la respuesta JSON
-.then(data => {
-  console.log('Respuesta recibida:', data); // Haz algo con los datos recibidos
-})
-.catch(error => {
-  console.error('Error:', error); // Maneja cualquier error
-});
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Respuesta recibida:', data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
 
   return (
     <div className="flex flex-col items-center justify-start px-6 py-12 space-y-10 bg-gray-50 min-h-screen">
-      
-      {/* Título principal */}
       <h1 className="text-4xl font-extrabold text-gray-800 mb-8">
         🏙️ Mapa de pisos disponibles
       </h1>
 
-      {/* Mapa */}
       <div
         ref={mapContainerRef}
         id="map-container"
@@ -143,7 +138,6 @@ function Map() {
         style={{ position: "relative" }}
       />
 
-      {/* Estadísticas */}
       <div className="w-full max-w-[900px] flex justify-center space-x-8 bg-white p-4 rounded-xl shadow-md border border-gray-200">
         <div className="flex items-center space-x-2">
           <div className="w-6 h-6 bg-red-500 rounded-full"></div>
@@ -159,7 +153,6 @@ function Map() {
         </div>
       </div>
 
-      {/* Información / formulario */}
       {selectedPoint && (
         <div className="w-full max-w-[900px] bg-white rounded-xl shadow-lg p-6 border border-gray-200 text-center">
           <h2 className="text-xl font-bold mb-2 text-gray-800">

@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import { fetchPisosTuristicos } from './pisos.js';
 
 const app = express();
 const PORT = 3000;
@@ -14,3 +15,8 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
+
+app.get('/pisos',(req, res) => {
+    fetchPisosTuristicos().then(console.log);
+})
+

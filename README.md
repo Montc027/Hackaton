@@ -1,5 +1,10 @@
-Ciudad Viva BCN
-Capturas de pantalla
+# Ciudad Viva BCN
+
+## Objetivo del proyecto
+
+Este proyecto tiene como finalidad ofrecer una herramienta interactiva para entender el impacto del turismo en los barrios de Barcelona. Permite a los usuarios decidir dónde vivir o qué zonas evitar según la saturación turística, mediante mapas, rankings y recomendaciones de pisos.
+
+# Capturas de pantalla
 Home (path"/")
 <img width="991" height="939" alt="Screenshot 2025-10-15 223936" src="https://github.com/user-attachments/assets/216820ce-5ac6-4299-a3e4-e1af64634824" />
 
@@ -15,7 +20,7 @@ Recomendación (path "recomendaciones")
 Ranking (path"/ranking")
 <img width="1152" height="660" alt="Screenshot 2025-10-15 220736" src="https://github.com/user-attachments/assets/a6ef1eb7-5faf-422b-bd48-a23e95708b7c" />
 
-⚡ Instalación y despliegue
+## Instalación y despliegue
 Clonar el repositorio:
 
 git clone https://github.com/HackatonServeiOcupacio2025/Hackaton.git
@@ -28,17 +33,14 @@ Iniciar la aplicación en modo desarrollo:
 npm run dev
 
 
-Tecnologias
+## Tecnologias
 Tailwindcss
 
 React
 
-Herramientas
-Trello
 
-Figma
+## Equipo
 
-Equipos
 -Sergi Diaz Lopez - BackEnd - LinkedIn
 
 -Alejandro Diaz Corredera - BackEnd - LinkedIn
@@ -50,3 +52,4 @@ Equipos
 -Montse Muñoz - FrontEnd - [LinkedIn](www.linkedin.com/in/montserrat-muñoz-cabrera-ba202b227)
 
 -Mio Ogura - FrontEnd - [LinkedIn](www.linkedin.com/in/mio-ogura)
+

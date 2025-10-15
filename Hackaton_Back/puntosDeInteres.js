@@ -1,5 +1,7 @@
+import fs from 'fs';
 
 export default async function puntosDeInteres() {
+    
     const params = new URLSearchParams({
         resource_id: '31431b23-d5b9-42b8-bcd0-a84da9d8c7fa',
         limit: 1000,

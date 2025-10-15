@@ -7,7 +7,7 @@
         { emoji: "🏆", title: "Ranking", description: "Compara barrios según la presión turística.", buttonText: "Ver ranking", route: "/ranking" },
         { emoji: "🚨", title: "Alertas", description: "Recibe avisos sobre zonas saturadas.", buttonText: "Ver alertas", route: "/alertas" },
         { emoji: "💡", title: "Recomendaciones", description: "Consejos útiles para turistas y vecinos.", buttonText: "Ver recomendaciones", route: "/recomendaciones" },
-        { emoji: "📊", title: "Gráficos", description: "Consulta estadísticas y análisis visual.", buttonText: "Ver gráficos", route: "/graficos" },
+        { emoji: "📊", title: "Concentración de pisos", description: "Consulta estadísticas y análisis visual.", buttonText: "Ver gráficos", route: "/graficos" },
     ];
 
     return (

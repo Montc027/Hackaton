@@ -3,7 +3,7 @@ import cors from 'cors';
 import puntosDeInteres from './puntosDeInteres.js';
 import { fetchPisosTuristicos } from './pisos.js';
 import suscribirse from './suscripciones.js';
-import ngrok from '@ngrok/ngrok';
+//import ngrok from '@ngrok/ngrok';
 
 
 
@@ -40,6 +40,6 @@ app.post('/api/suscribirse', (req, res) => {
 
 
 
-ngrok.listen(app).then(() => {
+/*ngrok.listen(app).then(() => {
   console.log("established listener at: " + app.listener.url());
-});
+});*/

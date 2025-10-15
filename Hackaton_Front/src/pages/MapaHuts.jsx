@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { MapContainer, TileLayer, CircleMarker, Tooltip } from "react-leaflet";
-import Heatmap from "./Heatmap";
+import Heatmap from "../components/Heatmap";
 //import hutsRaw from "../../Datos.json";
-import { puntosConPesoPorDistrito } from "./transform";
-const hutsRaw=await fetch("https://hackaton-production-cdcd.up.railway.app/api/pisos").then(data => data.json());
+import { puntosConPesoPorDistrito } from "../components/transform";
+const hutsRaw=await fetch("https://hackaton-production-cdcd.up.railway.app/api/pisosFull").then(data => data.json());
 
 // Colores por banda (cuartiles)
 function colorPorWeight(w) {

@@ -1,5 +1,6 @@
 import React from "react";
 import ChatBot from "react-chatbotify";
+import { fakeChat } from "../api/chat";
 
 export default function ChatbotWrapper() {
     const flow = {
@@ -8,12 +9,7 @@ export default function ChatbotWrapper() {
             path: "loop",
         },
         loop: {
-            message: async ({ userInput }) => {
-                const input = userInput.toLowerCase();
-                if (input.includes("hola")) return "¡Hola! ¿Cómo estás?";
-                if (input.includes("adiós")) return "Hasta luego.";
-                return "No estoy seguro, ¿puedes explicarme más?";
-            },
+            message: async ({ userInput }) => await fakeChat(userInput),
             path: "loop",
         },
     };

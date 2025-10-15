@@ -63,8 +63,8 @@ function Map() {
         type: "circle",
         source: "points",
         paint: {
-          "circle-radius": 6,
-          "circle-color": "#FF6B6B",
+          "circle-radius": 7,
+          "circle-color": "#EF4444",
           "circle-stroke-color": "#fff",
           "circle-stroke-width": 1,
         },
@@ -76,8 +76,8 @@ function Map() {
         type: "circle",
         source: "free-points",
         paint: {
-          "circle-radius": 8,
-          "circle-color": "#4ade80",
+          "circle-radius": 9,
+          "circle-color": "#22C55E",
           "circle-stroke-color": "#fff",
           "circle-stroke-width": 1,
         },
@@ -103,7 +103,20 @@ function Map() {
     });
 
     mapRef.current = map;
-    return () => map.remove();
+
+    const updateStats = () => {
+      if (!mapRef.current) return;
+      const map = mapRef.current;
+      const occupiedFeatures = map.queryRenderedFeatures({ layers: ["points-layer"] });
+      const freeFeatures = map.queryRenderedFeatures({ layers: ["free-points-layer"] });
+      setStats({ occupied: occupiedFeatures.length, free: freeFeatures.length });
+    };
+
+    map.on("move", updateStats);
+    return () => {
+      map.off("move", updateStats);
+      map.remove();
+    };
   }, []);
 
   const handleSubmit = (e) => {
@@ -111,53 +124,43 @@ function Map() {
     setSubmitted(true);
     fetch('https://hackaton-production-cdcd.up.railway.app/api/suscribirse', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     })
       .then(response => response.json())
-      .then(data => {
-        console.log('Respuesta recibida:', data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+      .then(data => console.log('Respuesta recibida:', data))
+      .catch(error => console.error('Error:', error));
   };
 
   return (
-    <div className="flex flex-col items-center justify-start px-6 py-12 space-y-10 bg-gray-50 min-h-screen">
-      <h1 className="text-4xl font-extrabold text-gray-800 mb-8">
-        🏙️ Mapa de pisos disponibles
-      </h1>
-
-      <div
-        ref={mapContainerRef}
-        id="map-container"
-        className="h-[500px] w-full max-w-[900px] rounded-2xl shadow-xl border border-gray-300"
-        style={{ position: "relative" }}
-      />
-
-      <div className="w-full max-w-[900px] flex justify-center space-x-8 bg-white p-4 rounded-xl shadow-md border border-gray-200">
-        <div className="flex items-center space-x-2">
-          <div className="w-6 h-6 bg-red-500 rounded-full"></div>
-          <span className="text-gray-700 font-medium">
-            Ocupados: {stats.occupied}
-          </span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-green-400 rounded-full"></div>
-          <span className="text-gray-700 font-medium">
-            Libres: {stats.free}
-          </span>
-        </div>
-      </div>
+    <section className="flex flex-col items-center justify-start px-6 py-12 space-y-10 bg-gray-50 min-h-screen">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-[#8C1758] tracking-wide leading-snug text-center drop-shadow-md max-w-[900px]">
+        Mapa de pisos
+      </h2>
+      <section className="relative w-full max-w-[900px]">
+        <div
+          ref={mapContainerRef}
+          id="map-container"
+          className="h-[500px] w-full rounded-2xl shadow-xl border border-gray-300"
+        />
+        <section className="absolute top-4 left-4 bg-white p-2 rounded shadow-md z-10">
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+            <span>{stats.occupied}</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 bg-green-400 rounded-full"></div>
+            <span>{stats.free}</span>
+          </div>
+        </section>
+      </section>
+      <h3 className="text-xl font-semibold text-gray-700 mt-6 mb-4 text-center max-w-[900px]">
+  Haz clic en los puntos del mapa para ver más información sobre cada piso. Los verdes están libres y los rojos ocupados.
+</h3>
 
       {selectedPoint && (
-        <div className="w-full max-w-[900px] bg-white rounded-xl shadow-lg p-6 border border-gray-200 text-center">
-          <h2 className="text-xl font-bold mb-2 text-gray-800">
-            {selectedPoint.name}
-          </h2>
+        <section className="w-full max-w-[900px] bg-white rounded-xl shadow-lg p-6 border border-gray-200 text-center">
+          <h2 className="text-xl font-bold mb-2 text-gray-800">{selectedPoint.name}</h2>
           <p className="text-gray-600">District: {selectedPoint.district}</p>
           <p className="text-gray-600 mb-4">ID: {selectedPoint.id}</p>
 
@@ -165,7 +168,7 @@ function Map() {
             !submitted ? (
               <>
                 <p className="text-green-700 font-semibold mb-3">
-                  ¡El piso está libre! Es tu oportunidad 🌿
+                  El piso está libre  ¡Es tu oportunidad!
                 </p>
                 <form onSubmit={handleSubmit} className="flex flex-col items-center">
                   <input
@@ -194,9 +197,10 @@ function Map() {
               Este piso actualmente está ocupado.
             </p>
           )}
-        </div>
+        </section>
       )}
-    </div>
+    </section>
+    
   );
 }
 

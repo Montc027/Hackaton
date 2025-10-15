@@ -14,7 +14,6 @@ export default async function puntosDeInteres() {
 
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        console.log("123")
         let data = await response.json();
         fs.writeFileSync('datos/puntosDeInteres.json', JSON.stringify(await data.result.records), 'utf-8');
         return data.result.records;

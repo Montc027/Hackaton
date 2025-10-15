@@ -31,12 +31,6 @@
             según la presión turística de cada barrio.
         </h3>
 
-        <section
-            className="w-full h-64 bg-cover bg-center"
-            style={{ backgroundImage: `url(${FooterImg})` }}
-            aria-hidden="true"
-        />
-        
         </main>
     );
     }

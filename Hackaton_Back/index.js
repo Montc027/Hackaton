@@ -3,6 +3,7 @@ import cors from 'cors';
 import puntosDeInteres from './puntosDeInteres.js';
 import fetchData from './puntosDeInteres.js';
 import { fetchPisosTuristicos } from './pisos.js';
+import suscribirse from './suscripciones.js';
 
 const app = express();
 const PORT = 3000;
@@ -25,4 +26,11 @@ app.get('/api/puntosDeInteres', async (req, res) => {
 app.get('/api/pisos',async(req, res) => {
     fetchPisosTuristicos().then(data => res.send(data));
 })
+
+app.post('/api/suscribirse', (req, res) => {
+    const { email } = req.body;
+    console.log(`New subscription from: ${email}`);
+    suscribirse(email);
+    // res.send({ message: `Subscription received for ${email}` });
+});
 

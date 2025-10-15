@@ -10,6 +10,7 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded());
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
@@ -31,6 +32,6 @@ app.post('/api/suscribirse', (req, res) => {
     const { email } = req.body;
     console.log(`New subscription from: ${email}`);
     suscribirse(email);
-    // res.send({ message: `Subscription received for ${email}` });
+    res.sendStatus(200);
 });
 

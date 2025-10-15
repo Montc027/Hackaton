@@ -1,1 +1,7 @@
-@import "tailwindcss";
+    @import "tailwindcss";
+
+    @layer base {
+    body {
+        font-family: 'Open Sans', sans-serif;
+    }
+    }

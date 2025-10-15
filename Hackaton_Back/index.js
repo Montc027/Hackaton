@@ -13,18 +13,9 @@ app.listen(PORT, () => {
 });
 
 app.get('/', (req, res) => {
-    console.log('Received request for /');
     res.send('OK');
 });
 
 app.get('/api/puntosDeInteres', async (req, res) => {
     res.send(await puntosDeInteres());
 });
-
-
-
-// If you're on Node < 18, install node-fetch:
-// npm install node-fetch
-// and then: import fetch from 'node-fetch';
-
-

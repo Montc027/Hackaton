@@ -46,15 +46,15 @@ function Recomendaciones() {
         <div className="flex flex-col min-h-screen">
             <main className="px-4 py-10 max-w-6xl mx-auto flex-1">
                 <header>
-<h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold text-[#8C1758] tracking-wide leading-snug text-center drop-shadow-md max-w-[900px] mx-auto mb-8">
-  Recomendaciones de pisos turísticos
-</h2>
-        <h3 className="text-center mb-13 text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-800">
-  Tenemos un total de {pisos.length} pisos distribuidos en{" "}
-  {Object.keys(pisosAgrupados).length} distritos.
-  <br />
-  ¡Explora cada distrito para encontrar tu piso ideal!
-</h3>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold text-[#8C1758] tracking-wide leading-snug text-center drop-shadow-md max-w-[900px] mx-auto mb-8">
+                        Recomendaciones de pisos turísticos
+                    </h2>
+                    <h3 className="text-center mb-13 text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-800">
+                        Tenemos un total de {pisos.length} pisos distribuidos en{" "}
+                        {Object.keys(pisosAgrupados).length} distritos.
+                        <br />
+                        ¡Explora cada distrito para encontrar tu piso ideal!
+                    </h3>
                 </header>
 
                 <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -68,8 +68,8 @@ function Recomendaciones() {
                                     <button
                                         onClick={() => toggleDistrict(district)}
                                         className={`w-full flex justify-between items-center px-4 py-3 font-semibold focus:outline-none ${openDistrict === district
-                                                ? "bg-[#002538] text-white"
-                                                : "bg-[#003957] text-white"
+                                            ? "bg-[#002538] text-white"
+                                            : "bg-[#003957] text-white"
                                             }`}
                                     >
                                         {district}

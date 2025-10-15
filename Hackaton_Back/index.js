@@ -21,10 +21,6 @@ app.get('/', (req, res) => {
 app.get('/api/puntosDeInteres', async (req, res) => {
     res.send(await puntosDeInteres());
 });
-// If you're on Node < 18, install node-fetch:
-// npm install node-fetch
-// and then: import fetch from 'node-fetch';
-
 
 app.get('/pisos',async(req, res) => {
     fetchPisosTuristicos().then(data => res.send(data));

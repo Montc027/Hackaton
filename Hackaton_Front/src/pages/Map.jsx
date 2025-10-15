@@ -10,6 +10,7 @@ function Map() {
   const [isFree, setIsFree] = useState(false);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [stats, setStats] = useState({ occupied: 0, free: 0 });
 
   useEffect(() => {
     mapboxgl.accessToken = import.meta.env.VITE_MAPTOKEN;
@@ -50,6 +51,11 @@ function Map() {
         type: "FeatureCollection",
         features: allPoints.filter(p => p.properties.free),
       };
+
+      setStats({
+        occupied: geojsonNormal.features.length,
+        free: geojsonFree.features.length,
+      });
 
       map.addSource("points", { type: "geojson", data: geojsonNormal });
       map.addLayer({
@@ -94,19 +100,6 @@ function Map() {
         setSubmitted(false);
         setEmail("");
       });
-
-      map.on("mouseenter", "points-layer", () => {
-        map.getCanvas().style.cursor = "pointer";
-      });
-      map.on("mouseleave", "points-layer", () => {
-        map.getCanvas().style.cursor = "";
-      });
-      map.on("mouseenter", "free-points-layer", () => {
-        map.getCanvas().style.cursor = "pointer";
-      });
-      map.on("mouseleave", "free-points-layer", () => {
-        map.getCanvas().style.cursor = "";
-      });
     });
 
     mapRef.current = map;
@@ -116,74 +109,101 @@ function Map() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
+    fetch('https://hackaton-production-cdcd.up.railway.app/api/suscribirse', {
+  method: 'POST', // o 'post'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    email: email,
+  }),
+})
+.then(response => response.json()) // Procesa la respuesta JSON
+.then(data => {
+  console.log('Respuesta recibida:', data); // Haz algo con los datos recibidos
+})
+.catch(error => {
+  console.error('Error:', error); // Maneja cualquier error
+});
   };
 
   return (
-<div className="flex flex-col items-center justify-center space-y-4">
-  <div className="flex justify-center items-start w-full max-w-[1000px] space-x-4">
-    <div
-      id="map-container"
-      ref={mapContainerRef}
-      className="h-[500px] w-[700px] rounded-xl shadow-lg"
-    />
+    <div className="flex flex-col items-center justify-start px-6 py-12 space-y-10 bg-gray-50 min-h-screen">
+      
+      {/* Título principal */}
+      <h1 className="text-4xl font-extrabold text-gray-800 mb-8">
+        🏙️ Mapa de pisos disponibles
+      </h1>
 
-    {/* Leyenda / gráfico */}
-    <div className="flex flex-col justify-start w-[280px] bg-white rounded-xl shadow-md p-4">
-      <h3 className="text-lg font-bold mb-2">Leyenda de colores</h3>
-      <div className="flex items-center mb-2">
-        <div className="w-6 h-6 bg-red-500 rounded-full mr-2"></div>
-        <span>Piso ocupado</span>
+      {/* Mapa */}
+      <div
+        ref={mapContainerRef}
+        id="map-container"
+        className="h-[500px] w-full max-w-[900px] rounded-2xl shadow-xl border border-gray-300"
+        style={{ position: "relative" }}
+      />
+
+      {/* Estadísticas */}
+      <div className="w-full max-w-[900px] flex justify-center space-x-8 bg-white p-4 rounded-xl shadow-md border border-gray-200">
+        <div className="flex items-center space-x-2">
+          <div className="w-6 h-6 bg-red-500 rounded-full"></div>
+          <span className="text-gray-700 font-medium">
+            Ocupados: {stats.occupied}
+          </span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-green-400 rounded-full"></div>
+          <span className="text-gray-700 font-medium">
+            Libres: {stats.free}
+          </span>
+        </div>
       </div>
-      <div className="flex items-center">
-        <div className="w-8 h-8 bg-green-400 rounded-full mr-2"></div>
-        <span>Piso libre</span>
-      </div>
-    </div>
-  </div>
 
-  {/* Información debajo del mapa */}
-  {selectedPoint && !isFree && (
-    <div className="mt-4 p-4 w-full max-w-[1000px] bg-white rounded-xl shadow-md text-center">
-      <h2 className="text-lg font-bold">{selectedPoint.name}</h2>
-      <p>District: {selectedPoint.district}</p>
-      <p>ID: {selectedPoint.id}</p>
-    </div>
-  )}
+      {/* Información / formulario */}
+      {selectedPoint && (
+        <div className="w-full max-w-[900px] bg-white rounded-xl shadow-lg p-6 border border-gray-200 text-center">
+          <h2 className="text-xl font-bold mb-2 text-gray-800">
+            {selectedPoint.name}
+          </h2>
+          <p className="text-gray-600">District: {selectedPoint.district}</p>
+          <p className="text-gray-600 mb-4">ID: {selectedPoint.id}</p>
 
-  {selectedPoint && isFree && (
-    <div className="mt-4 p-6 w-full max-w-[1000px] bg-green-100 rounded-xl shadow-lg text-center border-2 border-green-400">
-      {!submitted ? (
-        <>
-          <h2 className="text-xl font-extrabold text-green-700 mb-2">¡Libre!</h2>
-          <p className="text-green-800 mb-4">
-            El piso en {selectedPoint.name} es tu oportunidad.
-          </p>
-          <form onSubmit={handleSubmit} className="flex flex-col items-center">
-            <input
-              type="email"
-              placeholder="Introduce tu correo"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="p-2 border border-green-400 rounded mb-2 w-64 text-center"
-            />
-            <button
-              type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
-            >
-              Enviar
-            </button>
-          </form>
-        </>
-      ) : (
-        <p className="text-green-900 font-semibold">
-          ¡Gracias! Hemos recibido tu correo. Nos pondremos en contacto contigo.
-        </p>
+          {isFree ? (
+            !submitted ? (
+              <>
+                <p className="text-green-700 font-semibold mb-3">
+                  ¡El piso está libre! Es tu oportunidad 🌿
+                </p>
+                <form onSubmit={handleSubmit} className="flex flex-col items-center">
+                  <input
+                    type="email"
+                    placeholder="Introduce tu correo"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="p-2 border border-green-400 rounded mb-2 w-64 text-center focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
+                  >
+                    Contactar
+                  </button>
+                </form>
+              </>
+            ) : (
+              <p className="text-green-900 font-semibold">
+                ¡Gracias! Nos pondremos en contacto contigo pronto.
+              </p>
+            )
+          ) : (
+            <p className="text-red-600 font-medium">
+              Este piso actualmente está ocupado.
+            </p>
+          )}
+        </div>
       )}
     </div>
-  )}
-</div>
-
   );
 }
 

@@ -1,11 +1,11 @@
-    import React from "react";
+import React from "react";
 
-    function Footer() {
-    return (
-        <footer className="mt-10">
-        <img src="src/assets/footer.webp" alt="Imagen del footer" className="w-full" />
-        </footer>
-    );
-    }
+function Footer() {
+  return (
+    <footer className="bg-[#003957] text-white py-6 text-center">
+      © 2025 Ciudad Viva BCN. Todos los derechos reservados.
+    </footer>
+  );
+}
 
-    export default Footer;
+export default Footer;

@@ -22,7 +22,7 @@ app.get('/api/puntosDeInteres', async (req, res) => {
     res.send(await puntosDeInteres());
 });
 
-app.get('/pisos',async(req, res) => {
+app.get('/api/pisos',async(req, res) => {
     fetchPisosTuristicos().then(data => res.send(data));
 })
 

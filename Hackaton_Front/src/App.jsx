@@ -1,4 +1,4 @@
-import MapaHuts from "./components/MapaHuts";
+import MapaHuts from "./pages/MapaHuts";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
@@ -14,6 +14,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
+        <Route path="/graficos" element={<MapaHuts />} />
         <Route path="/" element={<Home />} />
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/recomendaciones" element={<Recomendaciones />} />

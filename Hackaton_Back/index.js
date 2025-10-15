@@ -30,6 +30,9 @@ app.get('/api/puntosDeInteres', async (req, res) => {
 app.get('/api/pisos',async(req, res) => {
     fetchPisosTuristicos().then(data => res.send(data));
 })
+app.get('/api/pisosFull',async(req, res) => {
+    fetchPisosTuristicosFull().then(data => res.send(data));
+})
 
 app.post('/api/suscribirse', (req, res) => {
     const { email } = req.body;

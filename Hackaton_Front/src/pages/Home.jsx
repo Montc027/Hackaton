@@ -3,10 +3,10 @@
 
     function Home() {
     const cards = [
-        { emoji: "🗺️", title: "Mapa", description: "Visualiza cómo el turismo afecta los barrios.", buttonText: "Ver mapa", route: "/mapa" },
-        { emoji: "🏆", title: "Ranking", description: "Compara barrios según la presión turística.", buttonText: "Ver ranking", route: "/ranking" },
-        { emoji: "💡", title: "Recomendaciones", description: "Consejos útiles para turistas y vecinos.", buttonText: "Ver recomendaciones", route: "/recomendaciones" },
-        { emoji: "📊", title: "Concentración de pisos", description: "Consulta estadísticas y análisis visual.", buttonText: "Ver gráficos", route: "/graficos" },
+        { emoji: "🗺️", title: "Mapa", description: "Consulta la disponibilidad de viviendas.", buttonText: "Ver mapa", route: "/mapa" },
+        { emoji: "🌆", title: "Concentración de pisos", description: "Consulta la concentración de turistas en cada barrio.", buttonText: "Ver gráficos", route: "/graficos" },
+        { emoji: "🏆", title: "Ranking", description: "Descubre cuáles son los mejores barrios para vivir.", buttonText: "Ver ranking", route: "/ranking" },
+        {emoji: "🌟", title: "Dónde vivir", description: "Explora los pisos disponibles por distrito.", buttonText: "Ver pisos", route: "/recomendaciones"}    
     ];
 
     return (

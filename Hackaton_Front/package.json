@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "dev:local": "vite --port 3000" 
+    "dev:local": "vite --port 3000"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
@@ -19,6 +19,7 @@
     "react": "^19.1.1",
     "react-chatbotify": "^2.4.0",
     "react-dom": "^19.1.1",
+    "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.9.4"
   },
   "devDependencies": {
